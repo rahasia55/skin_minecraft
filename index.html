@@ -13,18 +13,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/minecraft-skin-viewer@3.0.0-beta.2/dist/skin-viewer.min.js"></script>
     <script>
-        // Buat renderer
+        // Buat elemen canvas dan tambahkan ke body
+        const canvas = document.createElement("canvas");
+        document.body.appendChild(canvas);
+
+        // Buat viewer
         const viewer = new skinview3d.SkinViewer({
-            canvas: document.createElement("canvas"),
-            width: 300,
-            height: 400,
-            skin: "https://lh3.bunny.novaskin.me/IVNk-QX7H2xI-IzlJORE9qaz_W478XFP3C9aRhhzcSSXNddwe_WlwTi1wz5EmDOFhiDohdqh-qL8nx6YA7X1pA6UdOrhesnYPzQ9" // URL skin kamu
+            canvas: canvas,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            skin: "https://raw.githubusercontent.com/rahasia55/skin_minecraft/main/unnamed.png" // URL skin kamu
         });
-        document.body.appendChild(viewer.canvas);
 
         // Tambahkan animasi
         const rotator = viewer.animations.add(skinview3d.RotatingAnimation);
         rotator.speed = 1;
+
+        // Sesuaikan ukuran canvas saat ukuran jendela berubah
+        window.addEventListener("resize", () => {
+            viewer.width = window.innerWidth;
+            viewer.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
